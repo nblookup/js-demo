@@ -1,0 +1,25 @@
+<!--w3c制定dom规范，只要符合dom规范就可以操作dom-->
+<!--dom节点(node)：元素节点(element node)、属性节点(attribute node)、文本节点(text node)-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hello world 1</title>
+    <script type="text/javascript">
+        //当整个HTML文档完全加载成功后触发window.onload事件
+        //事件触发时，执行后面function里边的函数体。
+        window.onload = function () {
+            //获取所有button节点
+            var btn = document.getElementsByTagName("button");
+            //为button的onclick事件赋值：当点击button时，执行函数体
+            btn[0].onclick = function () {
+                alert("Hello World!");
+            };
+        };
+    </script>
+</head>
+
+<body>
+<button>Click me</button>
+</body>
+
+</html>
