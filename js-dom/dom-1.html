@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>dom-1</title>
+
+    <script type="text/javascript">
+        window.onload = function () {
+
+            //1.获取id为bj的那个节点
+            //在编写HTML文档时，需保证id唯一
+            //该方法为document对象的方法
+            var bjNode = document.getElementById("bj");
+            alert(bjNode);
+
+            //获取所有li节点
+            //使用标签名获取指定节点的集合
+            //该方法为Node接口的方法，即任何一个节点都有这个方法
+            var liNodes = document.getElementsByTagName("li");
+            alert(liNodes.length);
+
+            var cityNode = document.getElementById("city");
+            var cityLiNodes = cityNode.getElementsByTagName("li");
+            alert(cityLiNodes.length);
+
+            //3.根据html文档元素的name属性获取指定的节点的集合
+            var genderNode = document.getElementsByName("gender");
+            alert(genderNode.length);
+
+            //若html元素自身没有定义name元素，则getElementsByName方法对于老版本IE无效，所以使用该方法需谨慎
+            var bjNode2 = document.getElementsByName("beijing");
+            alert(bjNode2.length);
+        };
+    </script>
+</head>
+<body>
+
+<p>你喜欢哪个城市？</p>
+<ul id="city">
+    <li id="bj" name="beijing">北京</li>
+    <li>华盛顿</li>
+    <li>莫斯科</li>
+    <li>伦敦</li>
+    <li>巴黎</li>
+</ul>
+
+<p>你喜欢哪项运动</p>
+<ul id="sport">
+    <li>足球</li>
+    <li>篮球</li>
+    <li>排球</li>
+    <li>网球</li>
+    <li>射击</li>
+    <li>马术</li>
+</ul>
+
+<br/>
+
+gender:
+<input type="radio" name="gender" value="male">
+<input type="radio" name="gender" value="female">
+
+</body>
+</html>
