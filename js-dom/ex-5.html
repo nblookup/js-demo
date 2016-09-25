@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex-5</title>
+    <script type="text/javascript">
+
+        /*
+         * 为 #employeetable 的所有的 a 节点添加 Onclick 响应函数:
+         * 1. 弹出确认对话框: 确定要删除 xx 的信息吗? xx 为当前 a 节点所在的 td 所在的 tr 的
+         * 第一个 td 子节点的文本值, 且要去除前后空格.
+         * 2. 若点击 "确认" , 则删除 a 节点的所在的 行
+         *
+         * 注意:
+         * 1. a 节点是一个超级链接, 可以在其 onclick 事件中通过返回 false, 来取消默认行为
+         * 2. tr 的直接父节点为 tbody, 而不是 table
+         * 3. 可以把去除前后空格的代码写成一个 trim(str) 函数.
+         *
+         * 为 #addEmpButton 添加 onclick 响应函数:
+         * 1. 获取 #name, #email, #salary 的文本框的值
+         * 2. 利用 1 获取的文本值创建 3 个 td 节点, 在创建一个 tr 节点. 并把以上的 3 个 td
+         *    节点价位 tr 节点的子节点
+         <tr>
+         <td>Tom</td>
+         <td>tom@tom.com</td>
+         <td>5000</td>
+         </tr>
+         * 3. 在创建一个 td 节点: <td><a href="javascript:void(0)">Delete</a></td>
+         * 4. 把 3 创建的 td 也加为 tr 的子节点.
+         * 5. 再把 tr 加为 #employeetable 的 tbody 子节点的子节点.
+         * 6. 为新创建的 tr 的 a 子节点添加 Onclick 响应函数, 使其也具备删除的功能.
+         *
+         *
+         */
+
+        window.onload = function () {
+            var linkNodes = document.getElementsByTagName("a");
+            for (var i = 0; i < linkNodes.length; i++) {
+                linkNodes[i].onclick = function () {
+                    removeTr(this);
+                };
+            }
+
+            var btnNode = document.getElementsByTagName("button")[0];
+            btnNode.onclick = function () {
+                var name = trim(document.getElementById("name").value);
+                var email = trim(document.getElementById("email").value);
+                var salary = trim(document.getElementById("salary").value);
+
+                if (name && email && salary) {
+                    var nameTd = document.createElement("td");
+                    nameTd.textContent = name;  //tdNode.appendChild(document.createTextNode(name));
+                    var emailTd = document.createElement("td");
+                    emailTd.textContent = email;
+                    var salaryTd = document.createElement("td");
+                    salaryTd.textContent = salary;
+                    var deleteTd = document.createElement("td");
+                    var linkNode = document.createElement("a");
+                    linkNode.textContent = "Delete";
+                    linkNode.href = "javascript:void(0)";
+                    linkNode.onclick = function () {
+                        removeTr(this);
+                        return false; //返回false取消<a>标签默认行为
+                    };
+                    deleteTd.appendChild(linkNode);
+
+                    var trNode = document.createElement("tr");
+                    trNode.appendChild(nameTd);
+                    trNode.appendChild(emailTd);
+                    trNode.appendChild(salaryTd);
+                    trNode.appendChild(deleteTd);
+
+                    document.getElementById("employeeTable")
+                            .getElementsByTagName("tBody")[0]
+                            .appendChild(trNode);
+
+                } else {
+                    alert("请输入完整的员工信息");
+                }
+            };
+
+            //value: 用于获取 html 表单元素的值
+            //alert(this.value); //
+            //nodeValue: 用于获取文本节点的文本值.
+            //alert(this.nodeValue); //null
+        };
+
+        function removeTr(linkNode) {
+            var trNode = linkNode.parentNode.parentNode;
+            var textContent = trNode.getElementsByTagName("td")[0].textContent;
+            if (confirm("确定要删除" + trim(textContent) + "的信息吗？")) {
+                trNode.parentNode.removeChild(trNode);
+            }
+        }
+
+        function trim(content) {
+            if (content) {
+                var reg = /^\s*|\s*$/g;
+                return content.replace(reg, "");
+            }
+        }
+    </script>
+
+</head>
+<body>
+<!--<center></center>已废弃，不推荐使用-->
+<div align="center">
+    <h3>添加新员工</h3>
+
+    name:<input type="text" name="name" id="name">&nbsp;&nbsp;
+    email:<input type="text" name="email" id="email">&nbsp;&nbsp;
+    salary:<input type="text" name="salary" id="salary"><br><br>
+
+    <button type="button"  id="addEmpButton">Submit</button>
+
+    <br><br>
+    <hr>
+    <br><br>
+
+    <table id="employeeTable" border="1" cellpadding="5" cellspacing="0">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="javascript:void(0)">Delete</a></td>
+            <!--Javascript中void是一个操作符，该操作符指定要计算一个表达式但是不返回值。void 操作符用法格式如下：javascript:void(expression)-->
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>jerry@sohu.com</td>
+            <td>8000</td>
+            <td><a href="javascript:void(0)">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>bob@bob.com</td>
+            <td>10000</td>
+            <td><a href="javascript:void(0)">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
