@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+
+        //需求: 点击 submit 按钮时,　检查是否选择 type, 若没有选择给出提示: "请选择类型";
+        //     检查文本框中是否有输入(可以去除前后空格), 若没有输入,则给出提示: "请输入内容";
+        //若检查都通过, 则在相应的 ul 节点中添加对应的 li 节点
+
+        //需求2: 使包括新增的 li 都能响应 onclick 事件: 弹出 li 的文本值.
+
+        window.onload = function () {
+            var liNodes = document.getElementsByTagName("li");
+
+            for (var i = 0; i < liNodes.length; i++) {
+                liNodes[i].onclick = function () {
+                    showContent(this);
+                };
+            }
+
+            function showContent(liNode) {
+                alert("^_^" + liNode.textContent);
+            }
+
+            //1. 获取 #btn 对应的按钮 submitBtn
+            var submitBtn = document.getElementById("btn");
+
+            //2. 为 submitBtn 添加 onclick 响应函数
+            submitBtn.onclick = function () {
+                //4. 检查是否选择 type, 若没有选择给出提示: "请选择类型"
+                //4.1 选择所有的 name="selectType" 的节点 types
+                var types = document.getElementsByName("selectType");
+
+                //4.2 遍历 types, 检查其是否有一个 type 的 checked 属性存在, 就可说明
+                //有一个 type 被选中了: 通过  if(元素节点.属性名) 来判断某一个元素节点是否有
+                //该属性.
+                var typeVal = null;
+                for (var i = 0; i < types.length; i++) {
+                    if (types[i].checked) {
+                        typeVal = types[i].value;
+                        console.log(types[i].nodeValue);
+                        break;
+                    }
+                }
+
+                //4.3 若没有任何一个 type 被选中, 则弹出: "请选择类型". 响应方法结束:
+                //return false
+                if (typeVal == null) {
+                    alert("请选择类型");
+                    return false;
+                }
+
+                var textNode = document.getElementById("addName");
+                var textNodeValue = textNode.value;
+
+                //6. 去除 nameVal 的前后空格.
+                var reg = /^\s*|\s*$/g;
+                textNodeValue = textNodeValue.replace(reg, "");
+
+                //使 addName 的文本框也去除前后空格.
+                textNode.value = textNodeValue;
+
+                //6. 把 nameVal 和 "" 进行比较, 若是 "" 说明只出入了空格, 弹出 "请输入内容"
+                //方法结束: return false
+                if (textNodeValue == "") {
+                    alert("请输入内容");
+                    return false;
+                }
+
+                //7. 创建 li 节点
+                var liNode = document.createElement("li");
+                //8. 利用 nameVal 创建文本节点
+                //liNode.textContent = textNodeValue;
+                var content = document.createTextNode(textNodeValue);
+                liNode.appendChild(content);
+
+                //11. 为新创建的 li 添加 onclick 响应函数
+                liNode.onclick = function () {
+                    showContent(this);
+                };
+
+                //10. 把 7 加为选择的 type 对应的 ul 的子节点
+                document.getElementById(typeVal).appendChild(liNode);
+
+                //3. 在 onclick 响应函数的结尾处添加 return false, 就可以取消提交按钮的
+                //默认行为.
+                return false;
+            };
+        };
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing" title="Beijing">北京</li>
+    <li>上海</li>
+    <li>东京</li>
+    <li>首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+<input type="radio" name="selectType" value="city">城市
+<input type="radio" name="selectType" value="game">游戏
+<br/>
+name：<input id="addName" type="text" name="addName">
+<button id="btn" type="submit">确定</button>
+</body>
+</html>
