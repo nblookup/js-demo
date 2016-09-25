@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        //需求: 为所有的 li 节点添加 onclick 响应函数
+        //实现 city 子节点和 game 子节点对应位置的元素的互换
+
+        window.onload = function () {
+            //1. 获取所有的 li 节点
+            var liNodes = document.getElementsByTagName("li");
+
+            //2. 为每一个 li 节点添加 Onclick 响应函数
+            for (var i = 0; i < liNodes.length; i++) {
+                //手动为每个 li 节点添加一个 index 属性
+                liNodes[i].index = i;
+
+                liNodes[i].onclick = function () {
+                    //3. 找到和当前节点对应的那个 li 节点
+                    var targetIndex;
+                    if (this.index < 4) {
+                        targetIndex = this.index + 4;
+                    } else {
+                        targetIndex = this.index - 4;
+                    }
+
+                    //交换 index 属性。保证节点交换后index的值和liNodes数组下标一致。
+                    var tempIndex = this.index;
+                    this.index = targetIndex;
+                    liNodes[targetIndex].index = tempIndex;
+
+                    //4. 互换.
+                    replaceEach(this, liNodes[targetIndex]);
+                };
+            }
+        };
+
+
+        //自定义互换两个节点的函数
+        function replaceEach(aNode, bNode) {
+            if (aNode && bNode) {
+                //1. 获取 aNode 和 bNode 的父节点. 使用 parentNode 属性
+                var aParentNode = aNode.parentNode;
+                var bParentNode = bNode.parentNode;
+
+                //2. 克隆 aNode 或 bNode
+                var bNodeClone = bNode.cloneNode(true);
+                //克隆 bNode 的同时, 把 index 也复制.
+                bNodeClone.index = bNode.index;
+                //克隆 bNode 的同时, 把 onclick 事件也复制.
+                bNodeClone.onclick = bNode.onclick;
+                console.log(aNode.index);
+                console.log(bNode.index);
+                console.log(bNodeClone.index);
+                console.log("---------------------------");
+
+//                Node replaceChild(Node newChild,Node oldChild), oldChild必须在dom tree里面存在，否则报错。
+//                aParentNode.replaceChild(bNode, aNode); //Uncaught NotFoundError: Failed to execute 'replaceChild' on 'Node': The node to be replaced is not a child of this node.
+                //3. 分别调用 aNode 的父节点和 bNode 的父节点的 replaceChild()
+                //方法实现节点的互换
+                aParentNode.replaceChild(bNodeClone, aNode);
+                bParentNode.replaceChild(aNode, bNode);
+            }
+        }
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing" title="Beijing">北京</li>
+    <li>上海</li>
+    <li>东京</li>
+    <li>首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+name: <input type="text" name="username"
+             id="name" value="atguigu"/>
+</body>
+</html>
