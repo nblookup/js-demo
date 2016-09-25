@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom-5</title>
+    <script>
+        //关于节点的属性: nodeType, nodeName, nodeValue
+        //在文档中, 任何一个节点都有这 3 个属性
+        //而 id, name, value 是具体节点的属性.
+        onload = function () {
+
+            //1. 元素节点的这 3 个属性
+            var elementNode = document.getElementById("city");
+            console.log(elementNode.nodeType); //元素节点: 1
+            console.log(elementNode.nodeName); //节点名: UL
+            console.log(elementNode.nodeValue); //元素节点没有 nodeValue 属性值: null
+
+            //2. 属性节点
+            var bjNode = document.getElementById("bj");
+            var attributeNode = bjNode.getAttributeNode("title");
+            console.log(attributeNode.nodeType); //属性节点: 2
+            console.log(attributeNode.nodeName); //属性节点的节点名: 属性名
+            console.log(attributeNode.nodeValue); //属性节点的 nodeValue 属性值: 属性值
+
+            //3. 文本节点:
+            var textNode = bjNode.firstChild;
+            console.log(textNode.nodeType); //文本节点: 3
+            console.log(textNode.nodeName); //节点名: #text
+            console.log(textNode.nodeValue); //文本节点的 nodeValue 属性值: 文本值本身.
+
+            //nodeType、nodeName 是只读的.
+            //而 nodeValue 是可以被改变的。
+            //以上三个属性, 只有在文本节点中使用 nodeValue 读写文本值时使用最多.
+
+            console.log("----------------");
+            var nameNode = document.getElementById("name");
+            console.log(nameNode.id);
+            console.log(nameNode.name);
+            console.log(nameNode.value);
+        };
+    </script>
+</head>
+<body>
+<body>
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing" title="Beijing">北京</li>
+    <li>上海</li>
+    <li>东京</li>
+    <li>首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+name: <input type="text" name="username"
+             id="name" value="atguigu"/>
+</body>
+</body>
+</html>
