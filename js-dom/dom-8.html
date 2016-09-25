@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom-8</title>
+    <script type="text/javascript">
+
+        //测试 replaceChild 方法
+        window.onload = function () {
+
+            //实现 bj 节点和 rl 节点的互换.
+
+            var bjNode = document.getElementById("bj");
+            var rlNode = document.getElementById("rl");
+
+            var cityNode = document.getElementById("city");
+            var gameNode = document.getElementById("game");
+
+            //克隆 bjNode
+            //cloneNode(deep) 若 deep 为true, 则可以克隆子节点
+//            var bjNode2 = bjNode.cloneNode(true);
+//            gameNode.replaceChild(bjNode2, rlNode);
+//            cityNode.replaceChild(rlNode, bjNode);
+
+            replaceEach(bjNode, rlNode);
+        };
+        
+        function replaceEach(aNode, bNode) {
+            if (aNode && bNode) {
+                var aParentNode = aNode.parentNode;
+                var bParentNode = bNode.parentNode;
+
+                var tempNode = bNode.cloneNode(true);
+                aParentNode.replaceChild(tempNode, aNode);
+                bParentNode.replaceChild(aNode, bNode);
+            }
+        }
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing" title="Beijing">北京</li>
+    <li>上海</li>
+    <li>东京</li>
+    <li>首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+name: <input type="text" name="username"
+             id="name" value="atguigu"/>
+</body>
+</html>
