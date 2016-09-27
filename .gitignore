@@ -53,3 +53,4 @@ classes/
 *.svn
 .project
 .classpath
+/lib/jquery.js
