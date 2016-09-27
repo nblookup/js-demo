@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全选反选</title>
+    <script type="text/javascript">
+        //需求: 若 #checkedAll_2 被选中, 则 name=items 的 checkbox 都被选中
+        //若 #checkedAll_2 取消选中, 则 name=items 的 checkbox 都取消选中
+        //若 name=items 的 checkbox 都被选中, 则 #checkedAll_2 的 checkbox 也被选中
+        //若 name=items 的 checkbox 有一个没有被选中, 则 #checkedAll_2 取消选择.
+
+        //提示: 事件需要加给  #checkedAll_2, 获取 name=items 的 checkbox 数组
+        //判断是否被选中, 若被选择, 则 name=items 的 checkbox 都要被选择
+        //若没有被选择, 则 name=items 的 checkbox 都要取消选择
+        //根据是否存在 checked 属性来判断是否被选择, 可以使其 checked = true 被选择
+        //checked = false 取消选择.
+
+        //还需要给每个  name=items 的 checkbox 加响应函数
+        //判断  name=items 的 checkbox 是否都被选中: 选择的个数和总个数是否相等.
+        //若都被选择: 则使  #checkedAll_2 被选择
+        //若没有都被选择: 则使  #checkedAll_2 取消选择
+
+        window.onload = function () {
+
+            //全选/全不选
+            document.getElementById("check_all_2").onclick = function () {
+                var items = document.getElementsByName("items");
+                for (var i = 0; i < items.length; i++) {
+                    items[i].checked = this.checked;
+                }
+            };
+
+            var items = document.getElementsByName("items");
+            for (var i = 0; i < items.length; i++) {
+                items[i].onclick = function () {
+                    var num = 0;
+                    for (var j = 0; j < items.length; j++) {
+                        if (items[j].checked) {
+                            num++;
+                        }
+                    }
+                    document.getElementById("check_all_2").checked = items.length == num;
+                };
+            }
+
+            //全选
+            document.getElementById("check_all").onclick = function () {
+                var items = document.getElementsByName("items");
+                for (var i = 0; i < items.length; i++) {
+                    items[i].checked = true;
+                }
+            };
+
+            //全不选
+            document.getElementById("check_no").onclick = function () {
+                var items = document.getElementsByName("items");
+                for (var i = 0; i < items.length; i++) {
+                    items[i].checked = false;
+                }
+            };
+
+            //反选
+            document.getElementById("check_rev").onclick = function () {
+                var items = document.getElementsByName("items");
+                for (var i = 0; i < items.length; i++) {
+                    items[i].checked = !items[i].checked;
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+<form method="post" action="">
+    你爱好的运动是？
+    <input type="checkbox" id="check_all_2" value="全选"><label>全选/全不选</label>
+    <br>
+    <input type="checkbox" name="items" value="足球"><label>足球</label>
+    <input type="checkbox" name="items" value="篮球"><label>篮球</label>
+    <input type="checkbox" name="items" value="羽毛球"><label>羽毛球</label>
+    <input type="checkbox" name="items" value="乒乓球"><label>乒乓球</label>
+    <br>
+    <button type="button" id="check_all">全选</button>
+    <button type="button" id="check_no">全不选</button>
+    <button type="button" id="check_rev">反选</button>
+    <button type="button" id="send">提交</button>
+
+
+</form>
+</body>
+</html>
