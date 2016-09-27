@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+    <script src="../lib/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('button').click(function () {
+                alert("Hello world: " + $(this).text());
+            });
+        });
+    </script>
+
+    <!--jquery对象是dom对象的数组-->
+    <!--jquery对象和dom对象的方法不能互相访问。-->
+    <!--jquery对象和dom对象互相转换的方法：1、假设$btn是一个jquery对象，则$btn[n]是一个dom对象（n是数组下标）。 2、dom对象包装上$()符号就成为了jquery对象，比如this包装后成为$(this).-->
+
+</head>
+<body>
+<button>Submit1</button>
+<button id="btn">Submit2</button>
+</body>
+</html>
