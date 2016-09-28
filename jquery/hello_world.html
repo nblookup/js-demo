@@ -10,6 +10,22 @@
                 alert("Hello world: " + $(this).text());
             });
         });
+
+        var test = function () {
+            return new test.nb.get();
+        };
+        test.nb = test.prototype = {"c": 123, get: function(){alert("nihao")}};
+        window.test = test;
+        test.nb.get();
+
+        // 测试匿名闭包函数，特点是定义完立即执行
+        // 声明了一个匿名函数,加个()执行它,避免变量污染
+        // 形式：(function(arg...){function body}(arg...));   或   (function(arg...){function body})(arg...);
+        (function () {
+            return alert(1);
+        }(function () {
+            alert(2);
+        }));
     </script>
 
     <!--jquery对象是dom对象的数组-->

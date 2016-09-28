@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+    <script type="text/javascript">
+
+        /*
+         (function(arg...){function body})(arg...);
+         (function(arg...){function body}(arg...));
+
+         这种方式叫函数的闭包(closure)，可以让匿名函数立即被执行（最后面的那对括号就是让上面定义的匿名函数立即执行的秘密），这种闭包有以下几个优势或特点：
+         1. 减少了全局变量的个数，可以有效减少命名冲突
+         原因是包在里面的变量对于外面来说是不可见的，他们的作用域仅局限在匿名函数的函数体内
+         2. 这种方式可以保存闭包外面的变量的状态，这个特点还是举个例子比较易懂：
+         function fn() {
+         for(var i=0 ; i<2; i++) {
+         //(function(){
+         var backup = i;
+         setTimeout(function() {
+         alert(backup);
+         }, 2000);
+         //})();
+         }
+         }
+
+         fn();
+         上面代码的for循环一共两次，我们本来的目的是每隔两秒钟把每一次循环的索引(也就是i)输出，我们期待它应该输出：0和1，但是实际输出结果却是两次都是1
+         使用了闭包之后，我们会把循环中每一次i值的状态都保存下来，如下代码所示：
+         function fn() {for(var i=0 ; i<2; i++) {
+         (function(){var backup= i;
+         setTimeout(function() {
+         alert(backup);
+         },2000);
+         })();
+         }
+         }
+
+         fn();
+         这次我们得到了正确的结果:0和1
+
+         Enjoy!
+         */
+
+        function fn1() {
+            for(var i=0 ; i<2; i++) {
+                //(function(){
+                var backup = i;
+                setTimeout(function() {
+                    alert("示范1：" + backup); //IDE提示：Mutable variable is accessible from closure
+                }, 2000);
+                //})();
+            }
+        }
+
+        function fn2() {
+            for(var i=0 ; i<2; i++) {
+                (function(){
+                    var backup = i;
+                    setTimeout(function() {
+                        alert("示范2：" + backup);
+                    }, 2000);
+                })();
+            }
+        }
+
+//        fn2();
+//        fn2();
+    </script>
+</head>
+<body>
+<button type="button" onclick="fn1()">示范1</button>
+<button type="button" onclick="fn2()">示范2</button>
+</body>
+</html>
+
+<script type="text/javascript">
+    /*
+     一、什么是闭包和闭包的几种写法和用法
+
+     1、什么是闭包
+
+     闭包，官方对闭包的解释是：一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。闭包的特点：
+     　　1. 作为一个函数变量的一个引用，当函数返回时，其处于激活状态。
+     　　2. 一个闭包就是当一个函数返回时，一个没有释放资源的栈区。
+     　　简单的说，Javascript允许使用内部函数---即函数定义和函数表达式位于另一个函数的函数体内。而且，这些内部函数可以访问它们所在的外部函数中声明的所有局部变量、参数和声明的其他内部函数。当其中一个这样的内部函数在包含它们的外部函数之外被调用时，就会形成闭包。
+     */
+
+    /*
+    关于prototype:
+     　　1、不使用prototype属性定义的对象方法，是静态方法，只能直接用类名进行调用！另外，此静态方法中无法使用this变量来调用对象其他的属性！
+     　　2、使用prototype属性定义的对象方法，是非静态方法，只有在实例化后才能使用！其方法内部可以this来引用对象自身中的其他属性！
+     */
+</script>
