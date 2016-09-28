@@ -11,7 +11,15 @@
 # echo "script path = ${script_path}"
 
 lib_dir="./lib"
-spec_jquery="${lib_dir}/jquery-$1.js.bak"
+
+# 如果没传版本号，就使用默认值2.1.1
+if [ -n "$1" ]; then
+    version=$1
+else
+    version="2.1.1"
+fi
+
+spec_jquery="${lib_dir}/jquery-${version}.js.bak"
 
 if [ -f "${spec_jquery}" ]; then
     cp ${spec_jquery} ${lib_dir}/jquery.js
