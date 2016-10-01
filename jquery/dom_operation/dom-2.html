@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom-2</title>
+    <script src="../../lib/jquery.js"></script>
+
+    <script>
+
+        /*
+         append(): 向每个匹配元素的内部的结尾处添加内容
+         appendTo(): 将每个匹配的元素追加到指定的元素中的内部的结尾处
+         prepend(): 向每个匹配元素的内部的开始处添加内容
+         prependTo(): 将每个匹配的元素追加到指定的元素中的内部的开始处
+
+
+         after(): 向每个匹配的元素之后插入内容
+         insertAfter(): 将每个匹配的元素插入到指定的元素之后
+         before(): 向每个匹配的元素之前插入内容
+         insertBefore(): 将每个匹配的元素插入到指定的元素之前
+         以上方法不但能将新创建的 DOM 元素插入到文档中, 也能对原有的 DOM 元素进行移动.
+         */
+
+        $(function () {
+            var liNode1 = $("<li id='atguigu'>事不关己1</li>");
+            var liNode2 = $("<li id='atguigu'>事不关己2</li>");
+            var liNode3 = $("<li id='atguigu'>事不关己3</li>");
+            var liNode4 = $("<li id='atguigu'>事不关己4</li>");
+            $('#city').prepend(liNode1);
+            $('#city').append(liNode2);
+            liNode3.prependTo($('#city'));
+            liNode4.appendTo($('#city'));
+
+            var liNode5 = $("<li id='atguigu'>事不关己5</li>");
+            var liNode6 = $("<li id='atguigu'>事不关己6</li>");
+            var liNode7 = $("<li id='atguigu'>事不关己7</li>");
+            var liNode8 = $("<li id='atguigu'>事不关己8</li>");
+            liNode5.insertBefore($('#rl'));
+            liNode6.insertAfter($('#rl'));
+            $('#rl').before(liNode7);
+            $('#rl').after(liNode8);
+
+            //对 DOM 元素进行移动
+            $('#bj').after($('#xm')); //将xm移动到bj之后
+            $('#bj').before($('#se')); //将se移动到bj之前
+            $('#bj').insertAfter($('#dj')); //将bj移动到dj之后
+            $('#bj').insertBefore($('#sh')); //将bj移动到sh之前
+
+        });
+    </script>
+</head>
+<body>
+
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li id="sh">上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+    <li id="xm">厦门</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="atguigu"/>
+
+</body>
+</html>
