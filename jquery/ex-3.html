@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex-3</title>
+    <script src="../lib/jquery.js"></script>
+
+    <script>
+
+        $(function () {
+
+            //1. jQuery 对象调用 jQuery 提供的方法的返回值如果是一个对象的话
+            //那么这个对象一定是一个 jQuery 对象
+            //2. find() 方法: 查找子节点, 返回值为子节点对应的 jQuery 对象
+
+//            $('a').click(function () {
+//                $(this).parent().parent().remove();
+//            });
+
+            $('#info').on('click', 'td a', function () {
+                var textContent = $.trim($(this).parent().siblings('td:first').text());
+                var flag = confirm('确定要删除' + textContent + "的信息吗？");
+                if (flag) {
+                    $(this).parent().parent().remove();
+                }
+                return false;
+            });
+
+            $('button').click(function () {
+                var $name = $(':text[name="name"]');
+                var $email = $(':text[name="email"]');
+                var $salary = $(':text[name="salary"]');
+
+                var name = $name.val().trim();
+                var email = $email.val().trim();
+                var salary = $salary.val().trim();
+
+                if (name && email && salary) {
+                    var html = '<tr>' +
+                            '<td>' + name + '</td>' +
+                            '<td>' + email + '</td>' +
+                            '<td>' + salary + '</td>' +
+                            '<td><a href="javascript:void(0)">Delete</a></td>' +
+                            '</tr>';
+                    $('#info').append(html);
+                } else {
+                    alert("请输入完整的信息");
+                }
+
+                /*
+                 $("<tr></tr>").append("<td>" + $("#name").val() + "</td>")
+                 .append("<td>" + $("#email").val() + "</td>")
+                 .append("<td>" + $("#salary").val() + "</td>")
+                 .append("<td><a href="javascript:void(0)">Delete</a></td>")
+                 .appendTo("#info")
+                 .find("a")
+                 .click(function(){
+                 $(this).parent().parent().remove();
+                 });
+                 */
+
+                return false;
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+
+<div align="center">
+    <h5>添加新员工</h5>
+    name:<input type="text" name="name">
+    email:<input type="text" name="email">
+    salary:<input type="text" name="salary">
+    <br><br>
+    <button type="submit">Submit</button>
+    <br><br>
+    <hr>
+    <br>
+
+    <table id="info" border="1px" cellspacing="0" cellpadding="5px">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a id="test" href="javascript:void(0)">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>jerry@jerry.com</td>
+            <td>8000</td>
+            <td><a href="javascript:void(0)">Delete</a></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
