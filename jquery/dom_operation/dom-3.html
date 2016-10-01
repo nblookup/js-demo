@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom-3</title>
+    <script src="../../lib/jquery.js"></script>
+
+    <script>
+
+        /*
+         remove(): 从 DOM 中删除所有匹配的元素, 传入的参数用于根据 jQuery 表达式来筛选元素. 当某个节点用 remove() 方法删除后,
+         该节点所包含的所有后代节点将被同时删除. 这个方法的返回值是一个指向已被删除的节点的引用.
+
+         empty(): 清空节点 – 清空元素中的所有后代节点(不包含属性节点).
+         */
+
+        $(function () {
+            $('li').click(function () {
+                var $element = $(this).remove();
+                console.log($element);
+            });
+        });
+
+        $(function () {
+            $('button:first').click(function () {
+                var $empty = $('#game').empty();
+                console.log($empty);
+            });
+        })
+    </script>
+
+</head>
+<body>
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+<button>Empty #game's descendant nodes</button>
+
+</body>
+</html>
