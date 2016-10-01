@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>可见性过滤选择器</title>
+    <title>子元素过滤选择器</title>
     <style type="text/css">
         div, span, p {
             width: 140px;
@@ -26,35 +26,33 @@
             display: none;
         }
     </style>
-    <script src="../lib/jquery.js"></script>
+    <script src="../../lib/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
             $("#btn1").click(function () {
-                $("div:visible").css("background", "#ffbbaa");
+                //选取子元素, 需要在选择器前添加一个空格.
+                $("div.one :nth-child(2)").css("background", "#ffbbaa");
             });
             $("#btn2").click(function () {
-                //alert($("div:hidden").length);
-                //show(time): 可以使不可见的元素变为可见, time 表示时间, 以
-                //毫秒为单位
-                //jQuery 的很多方法支持方法的连缀, 即一个方法的返回值来时调用该
-                //方法的 jQuery 对象: 可以继续调用该对象的其他方法.
-                $("div:hidden").show(2000).css("background",
-                        "#ffbbaa");
+                $("div.one :first-child").css("background", "#ffbbaa");
             });
             $("#btn3").click(function () {
-                //val() 方法可以返回某一个表单元素的 value 属性值.
-                alert($("input:hidden").val());
+                $("div.one :last-child").css("background", "#ffbbaa");
+            });
+
+            $("#btn4").click(function () {
+                $("div.one :only-child").css("background", "#ffbbaa");
             });
 
         });
-
     </script>
 </head>
 <body>
-<input type="button" value="选取所有可见的  div 元素" id="btn1">
-<input type="button" value="选择所有不可见的 div 元素" id="btn2"/>
-<input type="button" value="选择所有不可见的 input 元素" id="btn3"/>
+<input type="button" value="选取每个class为one的div父元素下的第2个子元素." id="btn1"/>
+<input type="button" value="选取每个class为one的div父元素下的第一个子元素." id="btn2"/>
+<input type="button" value="选取每个class为one的div父元素下的最后一个子元素." id="btn3"/>
+<input type="button" value="如果class为one的div父元素下的仅仅只有一个子元素，那么选中这个子元素." id="btn4"/>
 
 <br><br>
 <div class="one" id="one">
@@ -81,10 +79,10 @@
 <div style="display:none;" class="none">style的display为"none"的div</div>
 <div class="hide">class为"hide"的div</div>
 <div>
-    包含input的type为"hidden"的div
-    <input type="hidden" value="123456789000" size="8">
+    包含input的type为"hidden"的div<input type="hidden" value="123456789" size="8">
 </div>
 <div id="mover">正在执行动画的div元素.</div>
 </body>
 </html>
+
 

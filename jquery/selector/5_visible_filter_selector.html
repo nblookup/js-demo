@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>内容过滤选择器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>可见性过滤选择器</title>
     <style type="text/css">
         div, span, p {
             width: 140px;
@@ -26,35 +26,35 @@
             display: none;
         }
     </style>
-    <script src="../lib/jquery.js"></script>
-
+    <script src="../../lib/jquery.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $('#btn1').click(function () {
-                $("div:contains('di')").css("background", "#ffbbaa");
+        $(document).ready(function () {
+
+            $("#btn1").click(function () {
+                $("div:visible").css("background", "#ffbbaa");
+            });
+            $("#btn2").click(function () {
+                //alert($("div:hidden").length);
+                //show(time): 可以使不可见的元素变为可见, time 表示时间, 以
+                //毫秒为单位
+                //jQuery 的很多方法支持方法的连缀, 即一个方法的返回值来时调用该
+                //方法的 jQuery 对象: 可以继续调用该对象的其他方法.
+                $("div:hidden").show(2000).css("background",
+                        "#ffbbaa");
+            });
+            $("#btn3").click(function () {
+                //val() 方法可以返回某一个表单元素的 value 属性值.
+                alert($("input:hidden").val());
             });
 
-            $('#btn2').click(function () {
-                $("div:empty").css("background", "#ffbbaa");
-            });
-
-            $('#btn3').click(function () {
-                $("div:has(.mini)").css("background", "#ffbbaa");
-            });
-
-            $('#btn4').click(function () {
-                $("div:parent").css("background", "#ffbbaa");
-//                $("div:not(:empty)").css("background", "#ffbbaa");
-            });
         });
+
     </script>
 </head>
 <body>
-
-<input type="button" value="选择 含有文本 'di' 的 div 元素" id="btn1" />
-<input type="button" value="选择不包含子元素(或者文本元素) 的 div 空元素" id="btn2" />
-<input type="button" value="选择含有 class 为 mini 元素的 div 元素" id="btn3" />
-<input type="button" value="选择含有子元素(或者文本元素)的div元素" id="btn4" />
+<input type="button" value="选取所有可见的  div 元素" id="btn1">
+<input type="button" value="选择所有不可见的 div 元素" id="btn2"/>
+<input type="button" value="选择所有不可见的 input 元素" id="btn3"/>
 
 <br><br>
 <div class="one" id="one">
@@ -81,9 +81,10 @@
 <div style="display:none;" class="none">style的display为"none"的div</div>
 <div class="hide">class为"hide"的div</div>
 <div>
-    包含input的type为"hidden"的div<input type="hidden" size="8">
+    包含input的type为"hidden"的div
+    <input type="hidden" value="123456789000" size="8">
 </div>
 <div id="mover">正在执行动画的div元素.</div>
-
 </body>
 </html>
+
