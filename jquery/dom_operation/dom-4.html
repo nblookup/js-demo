@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>克隆和替换节点</title>
+    <script src="../../lib/jquery.js"></script>
+    <script>
+        $(function () {
+            $('li').click(function () {
+                alert($(this).text());
+            });
+
+            //测试使用 jQuery replaceWith (replaceAll) 方法: 替换节点
+            /*
+             1. replaceWith , replaceAll 一对方法, 可以完成一件事. 就是主语宾语
+             哪个在前面的问题.
+             2. 以上的两个方法还有移动节点的功能
+             3. 节点互换需要先克隆节点.
+             4. var $rl = $("#rl").replaceWith($bj2);
+             */
+
+            var $bj = $('#bj');
+            var $city = $('#city');
+
+            $bj.clone().attr("id", "bj2").appendTo($city);
+            var $bj3 = $bj.clone(true).attr('id', "bj3");
+            $city.append($bj3);
+
+            $('<li>英雄联盟</li>').replaceAll($('li:last'));
+            $('#dj').replaceWith($('<li>台北</li>'));
+
+            //节点互换需要先克隆节点.
+            $('#rl').replaceWith($('#jpfc').clone(true)).replaceAll($('#jpfc'));
+
+        });
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li id="jpfc">极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female
+
+<br><br>
+name: <input type="text" name="username" value="atguigu"/>
+
+</body>
+</html>
