@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>包裹节点</title>
+    <script src="../../lib/jquery.js"></script>
+    <script>
+
+        //测试使用 jQuery wrap, wrapAll, wrapInner
+        $(function () {
+            var wrapHtml = '<font color="red"></font>';
+
+            //包装 li 本身
+            $('#city li').wrap(wrapHtml);
+
+            //包装所有的 li
+            $('#game li').wrapAll(wrapHtml);
+
+            //包装 li 后代元素.
+            $('#language li').wrapInner(wrapHtml);
+        });
+    </script>
+</head>
+<body>
+<p>你喜欢哪个城市?</p>
+<ul id="city">
+    <li id="bj" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li id="dj">东京</li>
+    <li id="se">首尔</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪款单机游戏?</p>
+<ul id="game">
+    <li id="rl">红警</li>
+    <li>实况</li>
+    <li>极品飞车</li>
+    <li>魔兽</li>
+</ul>
+
+<br><br>
+<p>你喜欢哪种开发语言?</p>
+<ul id="language">
+    <li>C</li>
+    <li>Java<div><p>哈哈</p></div></li>
+    <li>.NET</li>
+    <li>PHP</li>
+</ul>
+</body>
+</html>
