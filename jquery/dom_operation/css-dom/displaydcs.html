@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css dom 操作</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        a {
+            color: #04D;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #F50;
+            text-decoration: underline;
+        }
+
+        .SubCategoryBox {
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .SubCategoryBox ul {
+            list-style: none;
+        }
+
+        .SubCategoryBox ul li {
+            display: block;
+            float: left;
+            width: 200px;
+            line-height: 20px;
+        }
+
+        .show_more {
+            clear: both;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .show_more a {
+            display: block;
+            width: 120px;
+            margin: 0 auto;
+            line-height: 24px;
+            border: 1px solid #AAA;
+        }
+
+        .show_more a span {
+            padding-left: 15px;
+            background: url(img/down.gif) no-repeat 0 0;
+        }
+
+        .promoted a {
+            color: #F50;
+        }
+    </style>
+
+    <script src="../../../lib/jquery.js"></script>
+    <script>
+
+        //测试 jQuery 样式相关的方法.
+
+        $(function () {
+            var $divFirst = $('div:first');
+            var classStr = "SubCategoryBox";
+
+            //1. hasClass(): 某元素是否有指定的样式
+            var hasClass = $divFirst.hasClass(classStr);
+            console.log("hasClass: " + hasClass);
+
+            //2. 移除样式
+            $divFirst.removeClass(classStr);
+            hasClass = $divFirst.hasClass(classStr);
+            console.log("hasClass: " + hasClass);
+
+            //3. 添加样式
+            $divFirst.addClass(classStr);
+            hasClass = $divFirst.hasClass(classStr);
+            console.log("hasClass: " + hasClass);
+
+            //4. 切换样式: 存在, 则去除; 没有, 则添加.
+            $('.show_more').click(function () {
+                $divFirst.toggleClass(classStr);
+                return false;
+            });
+
+            //5. 获取和设置元素透明度: opacity 属性
+            console.log("opacity: " + $divFirst.css("opacity"));
+            $divFirst.css("opacity", 0.5);
+            console.log("opacity: " + $divFirst.css("opacity"));
+
+            //6. width 和 height
+            console.log("width: " + $divFirst.width());
+            console.log("width: " + $divFirst.height());
+            $divFirst.width(400);
+            $divFirst.height(100);
+            console.log("width: " + $divFirst.width());
+            console.log("width: " + $divFirst.height());
+
+            //7. 获取元素在当前视窗中的相对位移: offset().
+            //其返回对象包含了两个属性: top, left. 该方法只对可见元素有效
+            console.log($divFirst.offset());
+            console.log($divFirst.offset().top);
+            console.log($divFirst.offset().left);
+
+        });
+    </script>
+</head>
+<body>
+
+<div class="SubCategoryBox">
+    <ul>
+        <li><a href="#">佳能</a><i>(30440) </i></li>
+        <li><a href="#">索尼</a><i>(27220) </i></li>
+        <li><a href="#">三星</a><i>(20808) </i></li>
+        <li><a href="#">尼康</a><i>(17821) </i></li>
+        <li><a href="#">松下</a><i>(12289) </i></li>
+        <li><a href="#">卡西欧</a><i>(8242) </i></li>
+        <li><a href="#">富士</a><i>(14894) </i></li>
+        <li><a href="#">柯达</a><i>(9520) </i></li>
+        <li><a href="#">宾得</a><i>(2195) </i></li>
+        <li><a href="#">理光</a><i>(4114) </i></li>
+        <li><a href="#">奥林巴斯</a><i>(12205) </i></li>
+        <li><a href="#">明基</a><i>(1466) </i></li>
+        <li><a href="#">爱国者</a><i>(3091) </i></li>
+        <li><a href="#">其它品牌相机</a><i>(7275) </i></li>
+    </ul>
+    <div class="show_more">
+        <a href="notExist.html"><span>显示全部品牌</span></a>
+    </div>
+</div>
+
+</body>
+</html>
