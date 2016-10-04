@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示动画效果</title>
+    <link href="../css/style.css" type="text/css" rel="stylesheet"/>
+    <script src="../../../lib/jquery.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var $head = $('.head');
+            var $content = $('.content');
+
+            $content.hide();
+
+            //演示动画效果: show() 和 hide() 方法中传入毫秒数以达到动画的效果
+            /*
+            $head.mouseover(function () {
+                $content.show(3000);
+            }).mouseout(function () {
+                $content.hide("fast"); // "fast" "slow" "_default"
+            });
+            */
+
+            //只改变高度
+            /*
+            $head.mouseover(function () {
+                $content.slideDown("slow");
+            }).mouseout(function () {
+                $content.slideUp(100);
+            });
+            */
+
+            //只改变透明度
+            /*
+            $head.mouseover(function () {
+                $content.fadeIn("fast");
+            }).mouseout(function () {
+                $content.fadeOut(3000);
+            });
+            */
+
+            //toggle() 可以切换元素的可见状态.
+            //slideToggle(): 通过高度变化来切换匹配元素的可见性
+            //fadeToggle(): 通过透明度来切换元素的可见性.
+            //fadeTo(): 把不透明度以渐近的方式调整到指定的值 (0 – 1 之间).
+            $content.show();
+            var i = 1;
+            var flag = false; // true代表加，false代表减
+            $head.click(function () {
+                //$content.toggle("slow");
+                //$content.slideToggle(1000);
+                //$content.fadeToggle(2000);
+
+                //点击透明度减0.2，直到减到0，然后点击加0.2，如此循环。
+                //但是，用+ - 进行浮点运算，会有误差，不能完全达到效果。
+                if (!flag) {
+                    i -= 0.2;
+                    $content.fadeTo("slow", i);
+                    if (i <= 0) {
+                        flag = true;
+                    }
+                } else if (flag) {
+                    i += 0.2;
+                    $content.fadeTo("slow", i);
+                    if (i >= 1) {
+                        flag = false;
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="panel">
+    <h5 class="head">什么是jQuery?</h5>
+    <div class="content">
+        jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig
+        创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+    </div>
+</div>
+</body>
+</html>
