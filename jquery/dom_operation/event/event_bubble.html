@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件冒泡</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: 13px;
+            line-height: 130%;
+            padding: 60px;
+        }
+
+        #content {
+            width: 220px;
+            border: 1px solid #0050D0;
+            background: #96E555;
+        }
+
+        span {
+            width: 200px;
+            margin: 10px;
+            background: #666666;
+            cursor: pointer;
+            color: white;
+            display: block;
+        }
+
+        p {
+            width: 200px;
+            background: #888;
+            color: white;
+            height: 16px;
+        }
+    </style>
+    <script src="../../../lib/jquery.js"></script>
+
+    <script>
+        $(function () {
+            //事件的冒泡: 什么是事件的冒泡
+            $('body').click(function () {
+                console.log("click body.");
+            });
+
+            $('#content').click(function () {
+                console.log("click 外层div元素.");
+            });
+
+            $('#content').find('> span').click(function () {
+                console.log("click 内层div元素.");
+                //如何解决事件的冒泡: 通过在响应函数的结尾返回 false, 可以阻止冒泡.
+                return false;
+            });
+
+            var timeoutFlag;
+            $('*').click(function () {
+                console.debug("====================================================");
+                clearTimeout(timeoutFlag); //clearTimeout(id_of_settimeout)  参数：id_of_settimeout	由 setTimeout() 返回的 ID 值。该值标识要取消的延迟执行代码块。
+                timeoutFlag = setTimeout(function () {
+                    console.clear();
+                }, 3000);
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+<div id="content">
+    外层div元素
+    <span>内层span元素</span>
+    外层div元素
+</div>
+
+</body>
+</html>
